@@ -2,16 +2,19 @@ package com.vsii.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -39,10 +42,18 @@ public class User implements Serializable {
 	private String image;
 	
 	@Column(name="created_at")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date createdAt;
 	
 	@Column(name="updated_at")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
+	
+	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+	public List<Order> orders;
+	
+	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+	public List<SubOrder> subOrders;
 
 	public User() {
 		super();
@@ -104,6 +115,24 @@ public class User implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	@OneToMany(mappedBy = "Order", cascade = CascadeType.ALL)
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	@OneToMany(mappedBy = "Suborder", cascade = CascadeType.ALL)
+	public List<SubOrder> getSubOrders() {
+		return subOrders;
+	}
+
+	public void setSubOrders(List<SubOrder> subOrders) {
+		this.subOrders = subOrders;
 	}
 	
 }

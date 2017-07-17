@@ -3,15 +3,21 @@ package com.vsii.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @Entity
 @Table(name="Status")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Status implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -29,7 +35,10 @@ public class Status implements Serializable {
 	
 	@Column(name="updated_at")
 	private Date updated_at;
-
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "Status")
+	private Order order;
+	
 	public Status() {
 		super();
 	}

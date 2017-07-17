@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +22,10 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="order_id")
-	private long order_id;
+	private long orderId;
 	
 	@Column(name="order_date")
-	private Date order_date;
+	private Date orderDate;
 	
 	@Column(name="description")
 	private String description;
@@ -31,44 +34,49 @@ public class Order implements Serializable {
 	private int quantity;
 	
 	@Column(name="updated_at")
-	private Date updated_at;
+	private Date updatedAt;
 	
-	@Column(name="user_id")
-	private int user_id;
+	@ManyToOne
+    @JoinColumn(name="user_id")
+	private User user;
 	
-	@Column(name="status_id")
-	private int status_id;
+	@Id
+    @OneToOne
+    @JoinColumn(name="status_id")
+	private Status status;
+	
+	@Id
+	@OneToOne
+	@JoinColumn(name="supplier_id")
+	private Supplier supplier;
 
 	public Order() {
 		super();
 	}
 
-	public Order(int order_id, Date order_date, String description, int quantity, Date updated_at, int user_id,
-			int status_id) {
+	public Order(int order_id, Date order_date, String description, int quantity, Date updated_at) {
 		super();
-		this.order_id = order_id;
-		this.order_date = order_date;
+		this.orderId = order_id;
+		this.orderDate = order_date;
 		this.description = description;
 		this.quantity = quantity;
-		this.updated_at = updated_at;
-		this.user_id = user_id;
-		this.status_id = status_id;
+		this.updatedAt = updated_at;
 	}
 
-	public long getOrder_id() {
-		return order_id;
+	public long getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder_id(long order_id) {
-		this.order_id = order_id;
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 
-	public Date getOrder_date() {
-		return order_date;
+	public Date getOrderDate() {
+		return orderDate;
 	}
 
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	public String getDescription() {
@@ -87,28 +95,36 @@ public class Order implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getStatus_id() {
-		return status_id;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatus_id(int status_id) {
-		this.status_id = status_id;
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 	
 }

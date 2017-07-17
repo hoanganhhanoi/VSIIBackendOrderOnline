@@ -3,15 +3,21 @@ package com.vsii.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @Entity
 @Table(name="Supplier")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Supplier implements Serializable {
 	
 private static final long serialVersionUID = 1L;
@@ -19,47 +25,50 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="supplier_id")
-	private long supplier_id;
+	private int supplierId;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="supplier_name")
+	private String supplierName;
 	
 	@Column(name="address")
 	private String address;
 	
 	@Column(name="created_at")
-	private Date created_at;
+	private Date createdAt;
 	
 	@Column(name="updated_at")
-	private Date updated_at;
+	private Date updatedAt;
 
 	public Supplier() {
 		super();
 	}
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "Supplier")
+	private Order order;
 
 	public Supplier(int supplier_id, String name, String address, Date created_at, Date updated_at) {
 		super();
-		this.supplier_id = supplier_id;
-		this.name = name;
+		this.supplierId = supplier_id;
+		this.supplierName = name;
 		this.address = address;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
+		this.createdAt = created_at;
+		this.updatedAt = updated_at;
 	}
 
-	public long getSupplier_id() {
-		return supplier_id;
+	public int getSupplierId() {
+		return supplierId;
 	}
 
-	public void setSupplier_id(long supplier_id) {
-		this.supplier_id = supplier_id;
+	public void setSupplierId(int supplierId) {
+		this.supplierId = supplierId;
 	}
 
-	public String getName() {
-		return name;
+	public String getSupplierName() {
+		return supplierName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSupplierName(String supplier_name) {
+		this.supplierName = supplier_name;
 	}
 
 	public String getAddress() {
@@ -70,20 +79,28 @@ private static final long serialVersionUID = 1L;
 		this.address = address;
 	}
 
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 }

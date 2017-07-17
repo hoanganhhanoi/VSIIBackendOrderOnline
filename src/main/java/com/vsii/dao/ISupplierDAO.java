@@ -10,4 +10,5 @@ public interface ISupplierDAO {
     public void addSupplier(Supplier supplier);
     public void updateSupplier(Supplier supplier);
     public void deleteSupplier(int supplierId);
+    public boolean supplierExist(String SupplierName);
 }

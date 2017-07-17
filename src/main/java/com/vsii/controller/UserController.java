@@ -8,11 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,20 +19,21 @@ import com.vsii.entity.UserResponse;
 import com.vsii.service.IUserService;
 
 @Controller
-@RequestMapping("users")
+@RequestMapping(value = "users")
 public class UserController {
 
 	@Autowired
 	private IUserService userService;
 
-	@GetMapping("{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long id) {
 		User user = userService.getUserById(id);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+		UserResponse userRes = new UserResponse(user.getUserId(), user.getUserName(), user.getImage(), user.getCreatedAt(), user.getUpdatedAt());
+		return new ResponseEntity<UserResponse>(userRes, HttpStatus.OK);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@GetMapping("")
+	@RequestMapping(value = "")
 	public ResponseEntity<List<UserResponse>> getAllUsers() {
 		List<User> users = userService.getAllUsers();
 		List<UserResponse> res = new ArrayList<>();
@@ -64,13 +61,13 @@ public class UserController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@PutMapping("")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
-	@DeleteMapping("{id}")
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
 		userService.deleteUser(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

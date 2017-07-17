@@ -3,6 +3,8 @@ package com.vsii.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class UserResponse implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -10,7 +12,9 @@ public class UserResponse implements Serializable {
 	private long userId;
 	private String userName;
 	private String image;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date createdAt;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
 
 	public UserResponse() {

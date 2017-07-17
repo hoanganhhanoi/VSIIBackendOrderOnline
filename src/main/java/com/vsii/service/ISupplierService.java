@@ -1,5 +1,13 @@
 package com.vsii.service;
 
-public interface ISupplierService {
+import java.util.List;
 
+import com.vsii.entity.Supplier;
+
+public interface ISupplierService {
+	public List<Supplier> getAllSuppliers();
+	public Supplier getSupplierById(int supplierId);
+    public boolean addSupplier(Supplier supplier);
+    public void updateSupplier(Supplier supplier);
+    public void deleteSupplier(int supplierId);
 }
