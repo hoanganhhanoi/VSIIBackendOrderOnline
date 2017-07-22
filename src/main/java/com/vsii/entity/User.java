@@ -49,10 +49,10 @@ public class User implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
 	
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	public List<Order> orders;
 	
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	public List<SubOrder> subOrders;
 
 	public User() {

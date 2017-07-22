@@ -2,13 +2,18 @@ package com.vsii.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,8 +48,15 @@ private static final long serialVersionUID = 1L;
 		super();
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "Supplier")
+	// mappedBy la thuoc tinh ben Order
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "supplier", fetch = FetchType.LAZY, optional = false)
 	private Order order;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "supplier_food", 
+	joinColumns = @JoinColumn(name = "supplier_id", referencedColumnName = "supplier_id"), 
+	inverseJoinColumns = @JoinColumn(name = "food_id", referencedColumnName = "food_id"))
+	private List<Food> foods;
 
 	public Supplier(int supplier_id, String name, String address, Date created_at, Date updated_at) {
 		super();

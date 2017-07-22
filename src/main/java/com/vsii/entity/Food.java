@@ -2,12 +2,21 @@ package com.vsii.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -49,6 +58,14 @@ public class Food implements Serializable {
 	@Column(name="updated_at")
 	private Date updatedAt;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "supplier_food", 
+	joinColumns = @JoinColumn(name = "food_id", referencedColumnName = "food_id"), 
+	inverseJoinColumns = @JoinColumn(name = "supplier_id", referencedColumnName = "supplier_id"))
+	private List<Supplier> suppliers;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.food", cascade=CascadeType.ALL)
+	Set<DetailOrder> detailOrders = new HashSet<DetailOrder>();
 	
 	public Food() {
 		super();
@@ -122,6 +139,22 @@ public class Food implements Serializable {
 
 	public void setUpdatedAt(Date updated_at) {
 		this.updatedAt = updated_at;
+	}
+
+	public List<Supplier> getSuppliers() {
+		return suppliers;
+	}
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
+	}
+
+	public Set<DetailOrder> getDetailOrders() {
+		return detailOrders;
+	}
+
+	public void setDetailOrders(Set<DetailOrder> detailOrders) {
+		this.detailOrders = detailOrders;
 	}
 
 }

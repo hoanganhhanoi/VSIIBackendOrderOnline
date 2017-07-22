@@ -36,7 +36,7 @@ public class Status implements Serializable {
 	@Column(name="updated_at")
 	private Date updated_at;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "Status")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "status")
 	private Order order;
 	
 	public Status() {
