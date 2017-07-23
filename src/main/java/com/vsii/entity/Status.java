@@ -11,10 +11,10 @@ public class Status implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private int status_id;
-	private String status_name;
-	private Date created_at;
-	private Date updated_at;
+	private int statusId;
+	private String statusName;
+	private Date createdAt;
+	private Date updatedAt;
 	private Order order;
 	
 	public Status() {
@@ -23,42 +23,42 @@ public class Status implements Serializable {
 
 	public Status(int status_id, String status_name, Date created_at, Date updated_at) {
 		super();
-		this.status_id = status_id;
-		this.status_name = status_name;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
+		this.statusId = status_id;
+		this.statusName = status_name;
+		this.createdAt = created_at;
+		this.updatedAt = updated_at;
 	}
 
-	public int getStatus_id() {
-		return status_id;
+	public int getStatusId() {
+		return statusId;
 	}
 
-	public void setStatus_id(int status_id) {
-		this.status_id = status_id;
+	public void setStatusId(int status_id) {
+		this.statusId = status_id;
 	}
 
-	public String getStatus_name() {
-		return status_name;
+	public String getStatusName() {
+		return statusName;
 	}
 
-	public void setStatus_name(String status_name) {
-		this.status_name = status_name;
+	public void setStatusName(String status_name) {
+		this.statusName = status_name;
 	}
 
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date created_at) {
+		this.createdAt = created_at;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updated_at) {
+		this.updatedAt = updated_at;
 	}
 
 	public Order getOrder() {
