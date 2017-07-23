@@ -18,6 +18,11 @@ public class OrderService implements IOrderService {
 	public List<Order> getAllOrders() {
 		return orderDAO.getAllOrders();
 	}
+
+	@Override
+	public Order getOrderById(int orderId) {
+		return orderDAO.getOrderById(orderId);
+	}
 	
 	
 }

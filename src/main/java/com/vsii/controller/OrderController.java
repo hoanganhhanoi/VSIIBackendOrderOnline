@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.vsii.entity.Order;
+import com.vsii.entity.User;
 import com.vsii.entity.json.CustomResponseType;
 import com.vsii.entity.json.OrderJSON;
+import com.vsii.entity.json.UserJSON;
 import com.vsii.service.IOrderService;
 
 @Controller
@@ -36,5 +40,14 @@ public class OrderController {
 			}
 			return new ResponseEntity<CustomResponseType>(new CustomResponseType("success", res, ""), HttpStatus.OK);
 		}
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUserById(@PathVariable("id") int id) {
+		Order order = orderService.getOrderById(id);
+		OrderJSON res = new OrderJSON(order.getOrderId(), order.getOrderDate(), order.getDescription(),
+				order.getQuantity(), order.getUpdatedAt(), order.getUser().getUserId(),
+				order.getStatus().getStatusName(), order.getSupplier().getSupplierId());
+		return new ResponseEntity<CustomResponseType>(new CustomResponseType("success", res, ""), HttpStatus.OK);
 	}
 }

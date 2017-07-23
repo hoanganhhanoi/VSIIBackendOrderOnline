@@ -6,4 +6,5 @@ import com.vsii.entity.Order;
 
 public interface IOrderService {
 	public List<Order> getAllOrders();
+	public Order getOrderById(int orderId);
 }
