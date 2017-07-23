@@ -26,7 +26,7 @@ public class SupplierDAO implements ISupplierDAO {
 	}
 
 	@Override
-	public Supplier getSupplierById(int supplierId) {
+	public Supplier getSupplierById(long supplierId) {
 		return entityManager.find(Supplier.class, supplierId);
 	}
 

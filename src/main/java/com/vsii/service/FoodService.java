@@ -15,19 +15,19 @@ public class FoodService implements IFoodService {
 	private IFoodDAO foodDAO;
 	
 	@Override
-	public List<Food> getAllFoods() {
-		return foodDAO.getAllFoods();
+	public List<Food> getAllFoods(int supplierId) {
+		return foodDAO.getAllFoods(supplierId);
 	}
 
 	@Override
-	public Food getFoodById(long foodId) {
-		Food food = foodDAO.getFoodById(foodId);
+	public Food getFoodById(int foodId, int supplierId) {
+		Food food = foodDAO.getFoodById(foodId, supplierId);
 		return food;
 	}
 
 	@Override
 	public boolean addFood(Food food) {
-		if (foodDAO.FoodExist(food.getFoodName())) {
+		if (foodDAO.FoodExist(food.getFoodName(), food.getSupplier().getSupplierId())) {
             return false;
         } else {
         	foodDAO.addFood(food);
@@ -36,13 +36,13 @@ public class FoodService implements IFoodService {
 	}
 
 	@Override
-	public void updateFood(Food food) {
-		foodDAO.updateFood(food);
+	public int updateFood(Food food) {
+		return foodDAO.updateFood(food);
 	}
 
 	@Override
-	public void deleteFood(int foodId) {
-		foodDAO.deleteFood(foodId);
+	public int deleteFood(int foodId) {
+		return foodDAO.deleteFood(foodId);
 	}
 	
 }

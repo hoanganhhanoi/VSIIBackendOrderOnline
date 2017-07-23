@@ -7,10 +7,10 @@ import com.vsii.entity.Order;
 
 public interface IOrderDAO {
 	public List<Order> getAllOrders();
-	public Order getOrder(long orderId);
-	public List<Order> getOrderByUser(long userId);
+	public Order getOrder(int orderId);
+	public List<Order> getOrderByUser(int userId);
 	public List<Order> findOrderByDate(Date startDate, Date endDate);
 	public boolean order(Order order);
 	public void updateOrder(Order order);
-	public void deleteOrder(long orderId);
+	public void deleteOrder(int orderId);
 }

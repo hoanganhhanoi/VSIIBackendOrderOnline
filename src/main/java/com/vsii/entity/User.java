@@ -2,64 +2,32 @@ package com.vsii.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@Entity
-@Table(name="User")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="user_id")
-	private long userId;
-	
-	@NotNull
-	@Column(name="user_name")
+	private int userId;
 	private String userName;
-	
-	@NotNull
-	@Column(name="password")
 	private String password;
-	
-	@Column(name="image")
 	private String image;
-	
-	@Column(name="created_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date createdAt;
-	
-	@Column(name="updated_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	public List<Order> orders;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	public List<SubOrder> subOrders;
+	public Set<Order> orders;
 
 	public User() {
 		super();
 	}
 
-	public User(long userId, String userName, String password, String image, Date createdAt, Date updatedAt) {
+	public User(int userId, String userName, String password, String image, Date createdAt, Date updatedAt) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -69,11 +37,11 @@ public class User implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -117,22 +85,12 @@ public class User implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 	
-	@OneToMany(mappedBy = "Order", cascade = CascadeType.ALL)
-	public List<Order> getOrders() {
+	public Set<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
-	}
-
-	@OneToMany(mappedBy = "Suborder", cascade = CascadeType.ALL)
-	public List<SubOrder> getSubOrders() {
-		return subOrders;
-	}
-
-	public void setSubOrders(List<SubOrder> subOrders) {
-		this.subOrders = subOrders;
 	}
 	
 }

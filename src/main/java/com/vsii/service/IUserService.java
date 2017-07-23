@@ -8,6 +8,6 @@ public interface IUserService {
 	 public List<User> getAllUsers();
      public User getUserById(long userId);
      public boolean addUser(User user);
-     public void updateUser(User user);
-     public void deleteUser(long userId);
+     public int updateUser(User user);
+     public int deleteUser(long userId);
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vsii.entity.User;
-import com.vsii.entity.UserResponse;
+import com.vsii.entity.json.UserJSON;
 import com.vsii.service.IUserService;
 
 @Controller
@@ -26,25 +26,25 @@ public class UserController {
 	private IUserService userService;
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long id) {
+	public ResponseEntity<UserJSON> getUserById(@PathVariable("id") Long id) {
 		User user = userService.getUserById(id);
-		UserResponse userRes = new UserResponse(user.getUserId(), user.getUserName(), user.getImage(), user.getCreatedAt(), user.getUpdatedAt());
-		return new ResponseEntity<UserResponse>(userRes, HttpStatus.OK);
+		UserJSON userRes = new UserJSON(user.getUserId(), user.getUserName(), user.getImage(), user.getCreatedAt(), user.getUpdatedAt());
+		return new ResponseEntity<UserJSON>(userRes, HttpStatus.OK);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "")
-	public ResponseEntity<List<UserResponse>> getAllUsers() {
+	public ResponseEntity<List<UserJSON>> getAllUsers() {
 		List<User> users = userService.getAllUsers();
-		List<UserResponse> res = new ArrayList<>();
+		List<UserJSON> res = new ArrayList<>();
 		for(User user : users) {
-			UserResponse userRes = new UserResponse(user.getUserId(), user.getUserName(), user.getImage(), user.getCreatedAt(), user.getUpdatedAt());
+			UserJSON userRes = new UserJSON(user.getUserId(), user.getUserName(), user.getImage(), user.getCreatedAt(), user.getUpdatedAt());
 			res.add(userRes);
 		}
 		if (res.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<List<UserResponse>>(res, HttpStatus.OK);
+			return new ResponseEntity<List<UserJSON>>(res, HttpStatus.OK);
 		}
 	}
 
@@ -63,13 +63,19 @@ public class UserController {
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
-		userService.updateUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+		int result = userService.updateUser(user);
+		if(result > 0) 
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		else
+			return new ResponseEntity<User>(user, HttpStatus.NOT_IMPLEMENTED);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
-		userService.deleteUser(id);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		int result = userService.deleteUser(id);
+		if(result > 0)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		else
+			return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
 	}
 }

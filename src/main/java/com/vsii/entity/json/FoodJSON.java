@@ -1,14 +1,11 @@
-package com.vsii.entity;
+package com.vsii.entity.json;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Food implements Serializable {
+public class FoodJSON implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -19,14 +16,14 @@ public class Food implements Serializable {
 	private String oldPrice;
 	private Date createdAt;
 	private Date updatedAt;
-	private Supplier supplier;
+	private int supplierId;
 	
-	public Food() {
+	public FoodJSON() {
 		super();
 	}
 
-	public Food(int food_id, String food_name, String description, String new_price, String old_price,
-			Date created_at, Date updated_at) {
+	public FoodJSON(int food_id, String food_name, String description, String new_price, String old_price,
+			Date created_at, Date updated_at, int supplierId) {
 		super();
 		this.foodId = food_id;
 		this.foodName = food_name;
@@ -35,6 +32,7 @@ public class Food implements Serializable {
 		this.oldPrice = old_price;
 		this.createdAt = created_at;
 		this.updatedAt = updated_at;
+		this.supplierId = supplierId;
 	}
 
 	public int getFoodId() {
@@ -95,12 +93,11 @@ public class Food implements Serializable {
 		this.updatedAt = updated_at;
 	}
 
-	public Supplier getSupplier() {
-		return supplier;
+	public int getSupplierId() {
+		return supplierId;
 	}
 
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
+	public void setSupplier(int supplierId) {
+		this.supplierId = supplierId;
 	}
-	
 }

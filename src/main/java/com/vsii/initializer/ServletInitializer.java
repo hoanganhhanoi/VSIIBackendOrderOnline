@@ -1,4 +1,4 @@
-package com.vsii;
+package com.vsii.initializer;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

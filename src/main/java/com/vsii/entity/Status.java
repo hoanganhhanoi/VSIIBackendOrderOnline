@@ -3,40 +3,18 @@ package com.vsii.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@Entity
-@Table(name="Status")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Status implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="status_id")
+
 	private int status_id;
-	
-	@Column(name="status_name")
 	private String status_name;
-	
-	@Column(name="created_at")
 	private Date created_at;
-	
-	@Column(name="updated_at")
 	private Date updated_at;
-	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "status")
 	private Order order;
 	
 	public Status() {
@@ -81,6 +59,14 @@ public class Status implements Serializable {
 
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 }

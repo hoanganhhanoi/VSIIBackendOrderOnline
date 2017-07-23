@@ -5,9 +5,9 @@ import java.util.List;
 import com.vsii.entity.Food;
 
 public interface IFoodService {
-	public List<Food> getAllFoods();
-	public Food getFoodById(long foodId);
+	public List<Food> getAllFoods(int supplierId);
+	public Food getFoodById(int foodId, int supplierId);
     public boolean addFood(Food food);
-    public void updateFood(Food food);
-    public void deleteFood(int foodId);
+    public int updateFood(Food food);
+    public int deleteFood(int foodId);
 }

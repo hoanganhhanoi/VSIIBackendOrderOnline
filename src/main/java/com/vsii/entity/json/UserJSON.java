@@ -1,15 +1,15 @@
-package com.vsii.entity;
+package com.vsii.entity.json;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class UserResponse implements Serializable {
+public class UserJSON implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private long userId;
+	private int userId;
 	private String userName;
 	private String image;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
@@ -17,11 +17,11 @@ public class UserResponse implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
 
-	public UserResponse() {
+	public UserJSON() {
 		super();
 	}
 
-	public UserResponse(long userId, String userName, String image, Date createdAt, Date updatedAt) {
+	public UserJSON(int userId, String userName, String image, Date createdAt, Date updatedAt) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -30,11 +30,11 @@ public class UserResponse implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

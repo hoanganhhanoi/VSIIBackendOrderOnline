@@ -36,13 +36,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		userDAO.updateUser(user);
+	public int updateUser(User user) {
+		return userDAO.updateUser(user);
 	}
 
 	@Override
-	public void deleteUser(long userId) {
-		userDAO.deleteUser(userId);
+	public int deleteUser(long userId) {
+		return userDAO.deleteUser(userId);
 	}
 	
 	
