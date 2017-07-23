@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vsii.dao.IOrderDAO;
 import com.vsii.entity.Order;
@@ -17,6 +19,8 @@ import com.vsii.entity.Status;
 import com.vsii.entity.Supplier;
 import com.vsii.entity.User;
 
+@Transactional
+@Repository
 public class OrderDAO implements IOrderDAO {
 
 	@Autowired
@@ -71,40 +75,40 @@ public class OrderDAO implements IOrderDAO {
 		return orders;
 	}
 
-	@Override
-	public Order getOrder(int orderId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Order> getOrderByUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Order> findOrderByDate(Date startDate, Date endDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean order(Order order) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void updateOrder(Order order) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteOrder(int orderId) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public Order getOrder(int orderId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Order> getOrderByUser(int userId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Order> findOrderByDate(Date startDate, Date endDate) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public boolean order(Order order) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public void updateOrder(Order order) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteOrder(int orderId) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 	
 }
