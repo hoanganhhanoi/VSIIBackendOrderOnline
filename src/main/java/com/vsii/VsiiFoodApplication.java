@@ -1,4 +1,4 @@
-package com.vsii.initializer;
+package com.vsii;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
