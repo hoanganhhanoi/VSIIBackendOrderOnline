@@ -6,9 +6,9 @@ import com.vsii.entity.Supplier;
 
 public interface ISupplierDAO {
 	public List<Supplier> getAllSuppliers();
-	public Supplier getSupplierById(long supplierId);
-    public void addSupplier(Supplier supplier);
-    public void updateSupplier(Supplier supplier);
-    public void deleteSupplier(int supplierId);
+	public Supplier getSupplierById(int supplierId);
+    public Supplier addSupplier(Supplier supplier);
+    public int updateSupplier(Supplier supplier);
+    public int deleteSupplier(int supplierId);
     public boolean supplierExist(String SupplierName);
 }

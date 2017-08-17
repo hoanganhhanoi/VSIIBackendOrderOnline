@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vsii.entity.Supplier;
+import com.vsii.entity.User;
 import com.vsii.service.ISupplierService;
 
 @Controller
@@ -55,13 +56,19 @@ public class SupplierController {
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseEntity<Supplier> updateUser(@RequestBody Supplier supplier) {
-		supplierService.updateSupplier(supplier);
-		return new ResponseEntity<Supplier>(supplier, HttpStatus.OK);
+		int result = supplierService.updateSupplier(supplier);
+		if(result > 0) 
+			return new ResponseEntity<Supplier>(supplier, HttpStatus.OK);
+		else
+			return new ResponseEntity<Supplier>(supplier, HttpStatus.NOT_IMPLEMENTED);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
-		supplierService.deleteSupplier(id);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		int result = supplierService.deleteSupplier(id);
+		if(result > 0)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		else
+			return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
 	}
 }

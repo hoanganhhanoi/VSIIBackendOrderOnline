@@ -17,8 +17,6 @@ private static final long serialVersionUID = 1L;
 	private String address;
 	private Date createdAt;
 	private Date updatedAt;
-	private Order order;
-	private Set<Food> foods;
 	
 	public Supplier() {
 		super();
@@ -71,22 +69,6 @@ private static final long serialVersionUID = 1L;
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public Set<Food> getFoods() {
-		return foods;
-	}
-
-	public void setFoods(Set<Food> foods) {
-		this.foods = foods;
 	}
 	
 }

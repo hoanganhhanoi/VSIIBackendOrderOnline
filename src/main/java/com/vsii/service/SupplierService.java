@@ -36,13 +36,13 @@ public class SupplierService implements ISupplierService {
 	}
 
 	@Override
-	public void updateSupplier(Supplier supplier) {
-		supplierDAO.updateSupplier(supplier);
+	public int updateSupplier(Supplier supplier) {
+		return supplierDAO.updateSupplier(supplier);
 	}
 
 	@Override
-	public void deleteSupplier(int supplierId) {
-		supplierDAO.deleteSupplier(supplierId);
+	public int deleteSupplier(int supplierId) {
+		return supplierDAO.deleteSupplier(supplierId);
 	}
 
 }

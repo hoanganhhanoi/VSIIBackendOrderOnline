@@ -8,6 +8,6 @@ public interface ISupplierService {
 	public List<Supplier> getAllSuppliers();
 	public Supplier getSupplierById(int supplierId);
     public boolean addSupplier(Supplier supplier);
-    public void updateSupplier(Supplier supplier);
-    public void deleteSupplier(int supplierId);
+    public int updateSupplier(Supplier supplier);
+    public int deleteSupplier(int supplierId);
 }
