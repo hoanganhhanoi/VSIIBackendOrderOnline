@@ -8,12 +8,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.vsii.entity.Food;
 import com.vsii.entity.Order;
 import com.vsii.entity.User;
 import com.vsii.entity.json.CustomResponseType;
+import com.vsii.entity.json.DOrderRequest;
 import com.vsii.entity.json.OrderJSON;
 import com.vsii.entity.json.UserJSON;
 import com.vsii.service.IOrderService;
@@ -49,5 +53,14 @@ public class OrderController {
 				order.getQuantity(), order.getUpdatedAt(), order.getUser().getUserId(),
 				order.getStatus().getStatusName(), order.getSupplier().getSupplierId());
 		return new ResponseEntity<CustomResponseType>(new CustomResponseType("success", res, ""), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST, consumes = { "application/json",
+	"application/xml" }, produces = { "application/json", "application/xml" })
+	public ResponseEntity<Void> createOrder(@RequestBody DOrderRequest order, UriComponentsBuilder builder) {
+		int rs = orderService.createOrder(order);
+		if(rs > 0)
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
 	}
 }

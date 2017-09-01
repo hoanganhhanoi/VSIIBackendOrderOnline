@@ -2,7 +2,7 @@ package com.vsii.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 public class Order implements Serializable {
 
@@ -16,8 +16,8 @@ public class Order implements Serializable {
 	private User user;
 	private Status status;
 	private Supplier supplier;
-	private Set<SubOrder> subOrders;
-	private Set<DetailOrder> detailOrders;
+	private List<SubOrder> subOrders;
+	private List<DetailOrder> detailOrders;
 
 	public Order() {
 		super();
@@ -96,19 +96,19 @@ public class Order implements Serializable {
 		this.supplier = supplier;
 	}
 
-	public Set<SubOrder> getSubOrders() {
+	public List<SubOrder> getSubOrders() {
 		return subOrders;
 	}
 
-	public void setSubOrders(Set<SubOrder> subOrders) {
+	public void setSubOrders(List<SubOrder> subOrders) {
 		this.subOrders = subOrders;
 	}
 
-	public Set<DetailOrder> getDetailOrders() {
+	public List<DetailOrder> getDetailOrders() {
 		return detailOrders;
 	}
 
-	public void setDetailOrders(Set<DetailOrder> detailOrders) {
+	public void setDetailOrders(List<DetailOrder> detailOrders) {
 		this.detailOrders = detailOrders;
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vsii.dao.IOrderDAO;
 import com.vsii.entity.Order;
+import com.vsii.entity.json.DOrderRequest;
 
 @Service
 public class OrderService implements IOrderService {
@@ -23,6 +24,14 @@ public class OrderService implements IOrderService {
 	public Order getOrderById(int orderId) {
 		return orderDAO.getOrderById(orderId);
 	}
-	
+
+	@Override
+	public int createOrder(DOrderRequest order) {
+		int rs = orderDAO.createOrder(order);
+		if(rs > 0) 
+			return 1;
+		else 
+			return 0;
+	}
 	
 }
