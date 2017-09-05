@@ -11,7 +11,7 @@ public interface IOrderDAO {
 	public List<Order> getOrderByUser(int userId);
 	public int createOrder(DOrderRequest order);
 //	public List<Order> findOrderByDate(Date startDate, Date endDate);
-//	public boolean order(Order order);
+	public boolean order(Order order);
 //	public void updateOrder(Order order);
 //	public void deleteOrder(int orderId);
 }

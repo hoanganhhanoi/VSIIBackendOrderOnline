@@ -11,25 +11,23 @@ public class SubOrder implements Serializable {
 
 	private int subOrderId;
 	private String foodName;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date createdAt;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date updatedAt;
-	private User user;
-	private Order order;
+	private int userId;
+	private int orderId;
 
 	public SubOrder() {
 		super();
 	}
 
-	public SubOrder(int subOrderId, String foodName, Date createdAt, Date updatedAt, User user, Order order) {
+	public SubOrder(int subOrderId, String foodName, Date createdAt, Date updatedAt, int user, int order) {
 		super();
 		this.subOrderId = subOrderId;
 		this.foodName = foodName;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.user = user;
-		this.order = order;
+		this.userId = user;
+		this.orderId = order;
 	}
 
 	public int getSubOrderId() {
@@ -64,20 +62,20 @@ public class SubOrder implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int user) {
+		this.userId = user;
 	}
 
-	public Order getOrder() {
-		return order;
+	public int getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrderId(int order) {
+		this.orderId = order;
 	}
 
 }

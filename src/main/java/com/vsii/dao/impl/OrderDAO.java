@@ -139,11 +139,11 @@ public class OrderDAO implements IOrderDAO {
 //		return null;
 //	}
 //
-//	@Override
-//	public boolean order(Order order) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+	@Override
+	public boolean order(Order order) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 //
 //	@Override
 //	public void updateOrder(Order order) {

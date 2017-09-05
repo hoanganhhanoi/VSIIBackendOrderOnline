@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vsii.dao.IOrderDAO;
 import com.vsii.entity.Order;
+import com.vsii.entity.SubOrder;
 import com.vsii.entity.json.DOrderRequest;
 
 @Service
@@ -32,6 +33,12 @@ public class OrderService implements IOrderService {
 			return 1;
 		else 
 			return 0;
+	}
+
+	@Override
+	public int order(SubOrder subOrder) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
