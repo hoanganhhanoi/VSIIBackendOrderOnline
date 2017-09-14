@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vsii.entity.Supplier;
-import com.vsii.entity.User;
 import com.vsii.service.ISupplierService;
 
 @Controller

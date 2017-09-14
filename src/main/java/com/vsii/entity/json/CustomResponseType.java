@@ -16,6 +16,13 @@ public class CustomResponseType {
 		this.error = error;
 	}
 
+	public CustomResponseType(String status, String message, String error) {
+		super();
+		this.status = status;
+		this.data = message;
+		this.error = error;
+	}
+
 	public String getStatus() {
 		return status;
 	}

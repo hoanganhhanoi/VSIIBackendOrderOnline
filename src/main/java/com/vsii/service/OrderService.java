@@ -2,12 +2,12 @@ package com.vsii.service;
 
 import java.util.List;
 
+import com.vsii.entity.json.SubOrderJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vsii.dao.IOrderDAO;
 import com.vsii.entity.Order;
-import com.vsii.entity.SubOrder;
 import com.vsii.entity.json.DOrderRequest;
 
 @Service
@@ -36,9 +36,21 @@ public class OrderService implements IOrderService {
 	}
 
 	@Override
-	public int order(SubOrder subOrder) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int order(SubOrderJSON subOrder) {
+		int rs = orderDAO.order(subOrder);
+		if(rs > 0)
+			return 1;
+		else
+			return 0;
 	}
-	
+
+	@Override
+	public int updateStateOrder(int orderId, int statusId) {
+		int rs = orderDAO.updateStateOrder(orderId, statusId);
+		if(rs > 0)
+			return 1;
+		else
+			return 0;
+	}
+
 }

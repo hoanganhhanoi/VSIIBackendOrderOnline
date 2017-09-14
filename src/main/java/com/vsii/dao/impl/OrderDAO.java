@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.vsii.entity.*;
+import com.vsii.entity.json.SubOrderJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -22,11 +25,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vsii.dao.IOrderDAO;
-import com.vsii.entity.DetailOrder;
-import com.vsii.entity.Order;
-import com.vsii.entity.Status;
-import com.vsii.entity.Supplier;
-import com.vsii.entity.User;
 import com.vsii.entity.json.DOrderRequest;
 
 @Transactional
@@ -62,7 +60,11 @@ public class OrderDAO implements IOrderDAO {
 			+ "INSERT INTO orders(order_date, quantity, description, updated_at, user_id, status_id, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private final String INSERT_DETAIL_ORDER = ""
 			+ "INSERT INTO detailorder(order_id, food_id) VALUES (?, ?)";
-	
+	private final String INSERT_SUBODER = ""
+			+ "INSERT INTO suborder(quantity, created_at, updated_at, order_id, user_id, food_id) VALUES (?, ?, ?, ?, ?, ?)";
+	private final String UPDATE_ORDER = "UPDATE orders SET quantity = ?, description = ?, updated_at = ?, status_id = ?, supplier_id = ? WHERE order_id = ?";
+	private final String UPDATE_STATE = "UPDATE orders SET status_id = ? WHERE order_id = ?";
+
 	@Override
 	public List<Order> getAllOrders() {
 		List<Order> orders = jdbcTemplate.query(FETCH_ORDER, new ResultSetExtractor<List<Order>>()
@@ -139,12 +141,6 @@ public class OrderDAO implements IOrderDAO {
 //		return null;
 //	}
 //
-	@Override
-	public boolean order(Order order) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-//
 //	@Override
 //	public void updateOrder(Order order) {
 //		// TODO Auto-generated method stub
@@ -203,5 +199,36 @@ public class OrderDAO implements IOrderDAO {
 		
 		return 1;
 	}
-	
+
+	@Override
+	@Transactional
+	public int order(SubOrderJSON subOrder) {
+		try {
+			jdbcTemplate.update(INSERT_SUBODER, new Object[] { subOrder.getQuantity(), new Date(), new Date(), subOrder.getOrderId(), subOrder.getUserId(), subOrder.getFoodId() });
+			Order order = getOrderById(subOrder.getOrderId());
+			order.setQuantity(order.getQuantity() + subOrder.getQuantity());
+			return updateOrder(order);
+		} catch(EmptyResultDataAccessException e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateOrder(Order order) {
+		try {
+			return jdbcTemplate.update(UPDATE_ORDER, new Object[] {order.getQuantity(), order.getDescription(), new Date(), order.getStatus().getStatusId(), order.getSupplier().getSupplierId(), order.getOrderId()});
+		} catch(EmptyResultDataAccessException e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateStateOrder(int orderId, int statusId) {
+		try {
+			return jdbcTemplate.update(UPDATE_STATE, new Object[] {statusId, orderId});
+		} catch(EmptyResultDataAccessException e) {
+			return 0;
+		}
+	}
+
 }
